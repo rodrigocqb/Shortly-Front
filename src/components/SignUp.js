@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../common/Form";
+import { useLocal } from "../hooks/useLocal";
 import { postSignUp } from "../services/shortly";
 
 export default function SignUp() {
@@ -14,6 +15,8 @@ export default function SignUp() {
   const [disabled, setDisabled] = useState(false);
 
   const navigate = useNavigate();
+
+  useLocal();
 
   function handleForm({ value, name }) {
     setForm({

@@ -3,6 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../common/Form";
 import UserContext from "../contexts/UserContext";
+import { useLocal } from "../hooks/useLocal";
 import { postSignIn } from "../services/shortly";
 
 export default function SignIn() {
@@ -12,6 +13,8 @@ export default function SignIn() {
   const { setToken } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useLocal();
 
   function handleForm({ value, name }) {
     setForm({
