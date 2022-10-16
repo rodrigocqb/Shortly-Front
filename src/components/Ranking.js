@@ -4,19 +4,19 @@ import styled from "styled-components";
 import { getRanking } from "../services/shortly";
 
 export default function Ranking() {
-  const [loading, setLoading] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [ranking, setRanking] = useState([]);
 
   useEffect(() => {
-    setLoading(true);
+    setLoader(true);
     getRanking()
       .then((res) => {
         setRanking(res.data);
-        setLoading(false);
+        setLoader(false);
       })
       .catch((err) => {
         alert("An error has occurred when trying to load the ranking");
-        setLoading(false);
+        setLoader(false);
         console.log(err);
       });
   }, []);
@@ -27,8 +27,8 @@ export default function Ranking() {
         <span>🏆</span>
         <h1>Ranking</h1>
       </SubtitleSection>
-      <RankingSection loading={loading}>
-        {loading ? (
+      <RankingSection loader={loader}>
+        {loader ? (
           <>
             <ThreeDots
               height="20"
@@ -40,7 +40,7 @@ export default function Ranking() {
         ) : (
           <>
             {ranking.map((value, index) => (
-              <UserWrapper>
+              <UserWrapper key={value.id}>
                 <p>{`${index + 1}. ${value.name} - ${
                   value.linksCount
                 } links - ${value.visitCount} views`}</p>
@@ -85,7 +85,7 @@ const RankingSection = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: ${(props) => (props.loading ? "center" : "flex-start")};
+  justify-content: ${(props) => (props.loader ? "center" : "flex-start")};
   padding: 20px 40px;
   row-gap: 13px;
 `;

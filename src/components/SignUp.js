@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../common/Form";
 import { postSignUp } from "../services/shortly";
@@ -80,7 +81,18 @@ export default function SignUp() {
           required
         ></input>
         <button type="submit" disabled={disabled}>
-          Sign Up
+          {disabled ? (
+            <>
+              <ThreeDots
+                height="20"
+                width="81"
+                color="#FFFFFF"
+                ariaLabel="three-dots-loading"
+              />
+            </>
+          ) : (
+            "Sign Up"
+          )}
         </button>
       </Form>
     </main>

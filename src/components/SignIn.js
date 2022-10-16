@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { ThreeDots } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../common/Form";
 import UserContext from "../contexts/UserContext";
@@ -59,7 +60,18 @@ export default function SignIn() {
           required
         ></input>
         <button type="submit" disabled={disabled}>
-          Login
+          {disabled ? (
+            <>
+              <ThreeDots
+                height="13"
+                width="51"
+                color="#FFFFFF"
+                ariaLabel="three-dots-loading"
+              />
+            </>
+          ) : (
+            "Log in"
+          )}
         </button>
       </Form>
     </main>
