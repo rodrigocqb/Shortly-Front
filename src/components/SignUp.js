@@ -1,14 +1,16 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../common/Form";
-import UserContext from "../contexts/UserContext";
-import { postSignIn } from "../services/shortly";
+import { postSignUp } from "../services/shortly";
 
-export default function SignIn() {
-  const [form, setForm] = useState({ email: "", password: "" });
+export default function SignUp() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [disabled, setDisabled] = useState(false);
-
-  const { setToken } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -21,16 +23,15 @@ export default function SignIn() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if (form.confirmPassword !== form.password) {
+      return alert("The passwords do not match");
+    }
     setDisabled(true);
-    postSignIn(form)
-      .then((res) => {
-        setToken(res.data);
-        localStorage.setItem("user", JSON.stringify(res.data));
-        navigate("/");
-      })
+    postSignUp(form)
+      .then((res) => navigate("/signin"))
       .catch((err) => {
         console.log(err);
-        alert("There was an error when trying to log you in.");
+        alert("There was an error when trying to sign up.");
         setDisabled(false);
       });
   }
@@ -38,6 +39,16 @@ export default function SignIn() {
   return (
     <main>
       <Form disabled={disabled} onSubmit={handleSubmit}>
+        <input
+          placeholder="Name"
+          name="name"
+          type="text"
+          disabled={disabled}
+          onChange={(e) =>
+            handleForm({ value: e.target.value, name: e.target.name })
+          }
+          required
+        ></input>
         <input
           placeholder="E-mail"
           name="email"
@@ -58,8 +69,18 @@ export default function SignIn() {
           }
           required
         ></input>
+        <input
+          placeholder="Confirm your password"
+          name="confirmPassword"
+          type="password"
+          disabled={disabled}
+          onChange={(e) =>
+            handleForm({ value: e.target.value, name: e.target.name })
+          }
+          required
+        ></input>
         <button type="submit" disabled={disabled}>
-          Login
+          Sign Up
         </button>
       </Form>
     </main>

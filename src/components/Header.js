@@ -13,9 +13,11 @@ export default function Header() {
               Sign In
             </PWrapper>
           </Link>
-          <PWrapper main={location === "/signup" ? true : false}>
-            Sign Up
-          </PWrapper>
+          <Link to="/signup">
+            <PWrapper main={location === "/signup" ? true : false}>
+              Sign Up
+            </PWrapper>
+          </Link>
         </div>
       </TopSection>
       <TitleSection>

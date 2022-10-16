@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import GlobalStyle from "../styles/GlobalStyle";
 import Header from "./Header";
 import SignIn from "./SignIn";
+import SignUp from "./SignUp";
 
 function App() {
   const [token, setToken] = useState("");
@@ -15,6 +16,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
         </Routes>
       </UserContext.Provider>
