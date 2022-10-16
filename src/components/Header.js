@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Header() {
@@ -8,9 +8,11 @@ export default function Header() {
     <HeaderWrapper>
       <TopSection>
         <div>
-          <PWrapper main={!(location === "/signup") ? true : false}>
-            Sign In
-          </PWrapper>
+          <Link to="/signin">
+            <PWrapper main={!(location === "/signup") ? true : false}>
+              Sign In
+            </PWrapper>
+          </Link>
           <PWrapper main={location === "/signup" ? true : false}>
             Sign Up
           </PWrapper>
@@ -54,6 +56,7 @@ const TitleSection = styled.section`
   column-gap: 8px;
   h1 {
     font-size: 64px;
+    font-weight: 200;
   }
   span {
     font-size: 90px;
