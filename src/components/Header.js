@@ -1,9 +1,37 @@
+import { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import UserContext from "../contexts/UserContext";
 
 export default function Header() {
+  const { token, user } = useContext(UserContext);
+
   const location = useLocation().pathname;
 
+  if (token) {
+    return (
+      <HeaderWrapper>
+        <TopSection logged={true}>
+          <div>
+            <PWrapper main={true}>{`Welcome, ${user.name}`}</PWrapper>
+          </div>
+          <div>
+            <Link to="/">
+              <PWrapper>Home</PWrapper>
+            </Link>
+            <Link to="/ranking">
+              <PWrapper>Ranking</PWrapper>
+            </Link>
+            <PWrapper>Logout</PWrapper>
+          </div>
+        </TopSection>
+        <TitleSection>
+          <h1>Shortly</h1>
+          <span>🩳</span>
+        </TitleSection>
+      </HeaderWrapper>
+    );
+  }
   return (
     <HeaderWrapper>
       <TopSection>

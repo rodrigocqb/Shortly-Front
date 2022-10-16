@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThreeDots } from "react-loader-spinner";
 import styled from "styled-components";
+import UserContext from "../contexts/UserContext";
 import { getRanking } from "../services/shortly";
 
 export default function Ranking() {
   const [loader, setLoader] = useState(false);
   const [ranking, setRanking] = useState([]);
+
+  const { token } = useContext(UserContext);
 
   useEffect(() => {
     setLoader(true);
@@ -49,9 +52,11 @@ export default function Ranking() {
           </>
         )}
       </RankingSection>
-      <CreateAccountSection>
-        <h1>Create an account to use our service!</h1>
-      </CreateAccountSection>
+      {!token && (
+        <CreateAccountSection>
+          <h1>Create an account to use our service!</h1>
+        </CreateAccountSection>
+      )}
     </MainWrapper>
   );
 }

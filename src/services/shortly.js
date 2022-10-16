@@ -1,5 +1,11 @@
 import axios from "axios";
 
+function createHeaders() {
+  const token = JSON.parse(localStorage.getItem("user"));
+  const headers = { headers: { Authorization: `Bearer ${token}` } };
+  return headers;
+}
+
 function postSignUp(body) {
   const promise = axios.post(
     `${process.env.REACT_APP_API_BASE_URL}/signup`,
@@ -21,4 +27,13 @@ function getRanking() {
   return promise;
 }
 
-export { postSignUp, postSignIn, getRanking };
+function getUserData() {
+  const headers = createHeaders();
+  const promise = axios.get(
+    `${process.env.REACT_APP_API_BASE_URL}/users/me`,
+    headers
+  );
+  return promise;
+}
+
+export { postSignUp, postSignIn, getRanking, getUserData };
