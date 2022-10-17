@@ -25,6 +25,7 @@ export default function Header() {
               <PWrapper>Ranking</PWrapper>
             </Link>
             <PWrapper
+              logout={true}
               onClick={() => {
                 if (window.confirm("Are you sure you want to log out?")) {
                   localStorage.removeItem("user");
@@ -90,6 +91,7 @@ const TopSection = styled.section`
 
 const PWrapper = styled.p`
   color: ${(props) => (props.main ? "#5D9040" : "#9C9C9C")};
+  text-decoration: ${(props) => (props.logout ? "underline" : "none")};
   cursor: pointer;
 `;
 
