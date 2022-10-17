@@ -1,5 +1,8 @@
 # Shortly
 This is a web application where you can shorten internet links, built with NodeJS, Express, PostgreSQL and React. You can try the front-end here: https://shortly-murex.vercel.app/
+
+[Shortly.webm](https://user-images.githubusercontent.com/106849571/196081091-816fbbf5-4d18-410a-b692-1b779fdc8a68.webm)
+
 If you want to access your shortened urls, put your shortened url on the end of this link (instead of ":shortUrl"): https://shortly-back-api.herokuapp.com/urls/open/:shortUrl
 
 ## About
