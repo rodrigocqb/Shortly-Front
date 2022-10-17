@@ -39,5 +39,6 @@ export const Form = styled.form`
     justify-content: center;
     align-items: center;
     opacity: ${(props) => (props.disabled ? 0.7 : 1)};
+    cursor: pointer;
   }
 `;

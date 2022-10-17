@@ -36,4 +36,30 @@ function getUserData() {
   return promise;
 }
 
-export { postSignUp, postSignIn, getRanking, getUserData };
+function shortenUrl(body) {
+  const headers = createHeaders();
+  const promise = axios.post(
+    `${process.env.REACT_APP_API_BASE_URL}/urls/shorten`,
+    body,
+    headers
+  );
+  return promise;
+}
+
+function deleteUrl(id) {
+  const headers = createHeaders();
+  const promise = axios.delete(
+    `${process.env.REACT_APP_API_BASE_URL}/urls/${id}`,
+    headers
+  );
+  return promise;
+}
+
+export {
+  postSignUp,
+  postSignIn,
+  getRanking,
+  getUserData,
+  shortenUrl,
+  deleteUrl,
+};
