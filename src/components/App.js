@@ -6,6 +6,7 @@ import PrivatePage from "../pages/PrivatePage";
 import GlobalStyle from "../styles/GlobalStyle";
 import Header from "./Header";
 import Ranking from "./Ranking";
+import Redirect from "./Redirect";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 
@@ -30,6 +31,7 @@ function App() {
               </PrivatePage>
             }
           />
+          <Route path="/:shortUrl" element={<Redirect />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>
