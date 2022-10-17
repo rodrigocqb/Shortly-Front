@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UserContext from "../contexts/UserContext";
 
@@ -7,6 +7,8 @@ export default function Header() {
   const { token, user } = useContext(UserContext);
 
   const location = useLocation().pathname;
+
+  const navigate = useNavigate();
 
   if (token) {
     return (
@@ -22,7 +24,19 @@ export default function Header() {
             <Link to="/ranking">
               <PWrapper>Ranking</PWrapper>
             </Link>
-            <PWrapper>Logout</PWrapper>
+            <PWrapper
+              onClick={() => {
+                if (window.confirm("Are you sure you want to log out?")) {
+                  localStorage.removeItem("user");
+                  if (location === "/") {
+                    return window.location.reload();
+                  }
+                  return navigate("/");
+                }
+              }}
+            >
+              Logout
+            </PWrapper>
           </div>
         </TopSection>
         <TitleSection>
@@ -76,6 +90,7 @@ const TopSection = styled.section`
 
 const PWrapper = styled.p`
   color: ${(props) => (props.main ? "#5D9040" : "#9C9C9C")};
+  cursor: pointer;
 `;
 
 const TitleSection = styled.section`
